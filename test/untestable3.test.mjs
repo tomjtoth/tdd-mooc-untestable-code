@@ -1,6 +1,7 @@
-import { describe, test } from "vitest";
+import { beforeEach, describe, test } from "vitest";
 import { expect } from "chai";
 import { parsePeopleCsv } from "../src/untestable3.mjs";
+import { writeFileSync } from "fs";
 
 // example input:
 // Loid,Forger,,Male
@@ -8,10 +9,37 @@ import { parsePeopleCsv } from "../src/untestable3.mjs";
 // Yor,Forger,27,Female
 
 describe("Untestable 3: CSV file parsing", () => {
+  beforeEach(() => {
+    writeFileSync(
+      "test.csv",
+
+      `Loid,Forger,,Male
+      Anya,Forger,6,Female
+      Yor,Forger,27,Female`,
+
+      "utf8",
+    );
+  });
+
   test("todo", async () => {
-    // TODO: write proper tests
-    try {
-      expect(await parsePeopleCsv("people.csv")).to.deep.equal([]);
-    } catch (e) {}
+    expect(await parsePeopleCsv("test.csv")).to.deep.equal([
+      {
+        firstName: "Loid",
+        gender: "m",
+        lastName: "Forger",
+      },
+      {
+        age: 6,
+        firstName: "Anya",
+        gender: "f",
+        lastName: "Forger",
+      },
+      {
+        age: 27,
+        firstName: "Yor",
+        gender: "f",
+        lastName: "Forger",
+      },
+    ]);
   });
 });
