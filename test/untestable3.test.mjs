@@ -9,20 +9,12 @@ import { writeFileSync } from "fs";
 // Yor,Forger,27,Female
 
 describe("Untestable 3: CSV file parsing", () => {
-  beforeEach(() => {
-    writeFileSync(
-      "test.csv",
-
-      `Loid,Forger,,Male
+  test("parsePeopleCSV", () => {
+    expect(
+      parsePeopleCsv(`Loid,Forger,,Male
       Anya,Forger,6,Female
-      Yor,Forger,27,Female`,
-
-      "utf8",
-    );
-  });
-
-  test("todo", async () => {
-    expect(await parsePeopleCsv("test.csv")).to.deep.equal([
+      Yor,Forger,27,Female`),
+    ).to.deep.equal([
       {
         firstName: "Loid",
         gender: "m",
