@@ -31,8 +31,8 @@
     "npm": ">=10"
   },
   "scripts": {
-    "test": "vitest run",
-    "autotest": "vitest watch",
+    "test": "PGDATABASE=untestable PGUSER=untestable PGPASSWORD=secret vitest run",
+    "autotest": "PGDATABASE=untestable PGUSER=untestable PGPASSWORD=secret vitest watch",
     "format": "prettier --write ."
   }
 }
