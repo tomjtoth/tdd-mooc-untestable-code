@@ -10,10 +10,6 @@ export class PostgresUserDao {
     port: process.env.PGPORT,
   });
 
-  close() {
-    this.db.end();
-  }
-
   #rowToUser(row) {
     return { userId: row.user_id, passwordHash: row.password_hash };
   }
